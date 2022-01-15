@@ -21,7 +21,6 @@ router.post("/", async (req, res) => {
   const newBucketListItem = new BucketListItem(req.body);
   try {
     const bucketListItem = await newBucketListItem.save();
-    console.log("attempting to create new item");
     if (!bucketListItem) throw new Error("Cannot create newBucketListItem");
 
     res.status(200).json(newBucketListItem);
