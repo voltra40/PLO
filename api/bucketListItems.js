@@ -35,8 +35,9 @@ router.put("/:id", async (req, res) => {
   try {
     const response = await BucketListItem.findByIdAndUpdate(id, req.body);
     if (!response) throw Error("Something went wrong");
-    //altered
-    res.status(200).json(response);
+    // this allows for front end to update asynchronously
+    const updated = { ...response._doc, ...req.body};
+    res.status(200).json(updated);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

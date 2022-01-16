@@ -1,101 +1,19 @@
 <template>
-  <div id="app">
-    <h1 class="subtitle has-text-centered">Bucket List:</h1>
-    <div class="field has-addons">
-      <div class="control is-expanded">
-        <input
-          class="input"
-          v-model="description"
-          type="text"
-          placeholder="add an item ..."
-        />
-      </div>
-      <div class="control">
-        <a class="button is-info" @click="addItem" :disabled="!description">Add</a>
-      </div>
+  <nav class="navbar">
+    <div class="navbar-start">
+      <a class="navbar-item">
+        <router-link to="/">Home</router-link>
+      </a>
+      <a class="navbar-item">
+        <router-link :to="{ name: 'bucket' }">Bucket List</router-link>
+      </a>
     </div>
-    <div class="notification" v-for="(item, i) in items" :key="item._id">
-      <div class="columns">
-        <input
-          class="column input"
-          v-if="isSelected(item)"
-          v-model="editedDescription"
-        />
-        <p v-else class="column">
-          <span class="tag is-primary"> {{ i + 1 }} </span>
-          {{ item.description }}
-        </p>
-        <div class="column is-narrow">
-          <span class="icon has-text-primary" @click="isSelected(item) ? unselect() : select(item)">
-            <i class="material-icons">{{isSelected(item) ? "close" : "edit"}}</i>
-          </span>
-          <span class="icon has-text-info" @click="isSelected(item) ? updateItem(item, i) : deleteItem(item, i)">
-            <i class="material-icons">{{isSelected(item) ? "save" : "delete"}}</i>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
+  </nav>
+  <router-view />
 </template>
 
 <script>
-import axios from "axios";
 export default {
-  name: "App",
-  
-  data() {
-    return {
-      items: [],
-      description: "",
-      editedDescription: "",
-      selected: {},
-    };
-  },
-
-  async mounted() {
-    const response = await axios.get("http://localhost:4000/api/bucketListItems");
-    this.items = response.data;
-  },
-
-  methods: {
-    async addItem() {
-      const response = await axios.post("http://localhost:4000/api/bucketListItems/", { description: this.description });
-      this.items.push(response.data);
-      this.description = "";
-    },
-    async deleteItem(item, i) {
-      await axios.delete("http://localhost:4000/api/bucketListItems/" + item._id);
-      this.items.splice(i, 1);
-    },
-    select(item) {
-      this.selected = item;
-      this.editedDescription = item.description;
-    },
-    isSelected(item) {
-      return (item._id === this.selected._id);
-    },
-    unselect() {
-      this.selected = {};
-      this.editedDescription = "";
-    },
-    async updateItem(item, i) {
-      let response = await axios.put("http://localhost:4000/api/bucketListItems/" + item._id, { description: this.editedDescription });
-      // await new Promise(resolve => setTimeout(resolve, 1000));
-      this.items[i] = response.data;
-      this.unselect();
-      location.reload();
-    },
-  },
+  name: "app",
 };
 </script>
-
-<style>
-#app {
-  margin: auto;
-  margin-top: 10%;
-  max-width: 70%;
-}
-.icon {
-  cursor: pointer;
-}
-</style>
