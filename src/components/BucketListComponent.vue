@@ -11,7 +11,7 @@
         />
       </div>
       <div class="control">
-        <a class="button is-info" @click="addItem" :disabled="!description">Add</a>
+        <a class="button is-dark" @click="addItem" >Add</a>
       </div>
     </div>
     <div class="notification" v-for="(item, i) in items" :key="item._id">
@@ -22,14 +22,14 @@
           v-model="editedDescription"
         />
         <p v-else class="column">
-          <span class="tag is-primary"> {{ i + 1 }} </span>
+          <span class="tag is-black"> {{ i + 1 }} </span>
           {{ item.description }}
         </p>
         <div class="column is-narrow">
-          <span class="icon has-text-primary" @click="isSelected(item) ? unselect() : select(item)">
+          <span class="icon has-text-dark" @click="isSelected(item) ? unselect() : select(item)">
             <i class="material-icons">{{isSelected(item) ? "close" : "edit"}}</i>
           </span>
-          <span class="icon has-text-info" @click="isSelected(item) ? updateItem(item, i) : deleteItem(item, i)">
+          <span class="icon has-text-danger" @click="isSelected(item) ? updateItem(item, i) : deleteItem(item, i)">
             <i class="material-icons">{{isSelected(item) ? "save" : "delete"}}</i>
           </span>
         </div>
@@ -52,18 +52,18 @@ export default {
   },
 
   async mounted() {
-    const response = await axios.get("http://localhost:4000/api/bucketListItems");
+    const response = await axios.get("http://localhost:4000/api/bucket-list");
     this.items = response.data;
   },
 
   methods: {
     async addItem() {
-      const response = await axios.post("http://localhost:4000/api/bucketListItems/", { description: this.description });
+      const response = await axios.post("http://localhost:4000/api/bucket-list/", { description: this.description });
       this.items.push(response.data);
       this.description = "";
     },
     async deleteItem(item, i) {
-      await axios.delete("http://localhost:4000/api/bucketListItems/" + item._id);
+      await axios.delete("http://localhost:4000/api/bucket-list/" + item._id);
       this.items.splice(i, 1);
     },
     select(item) {
@@ -78,7 +78,7 @@ export default {
       this.editedDescription = "";
     },
     async updateItem(item, i) {
-      let response = await axios.put("http://localhost:4000/api/bucketListItems/" + item._id, { description: this.editedDescription });
+      let response = await axios.put("http://localhost:4000/api/bucket-list/" + item._id, { description: this.editedDescription });
       this.items[i] = response.data;
       this.unselect();
     },

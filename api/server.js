@@ -23,7 +23,7 @@ mongoose.connect(mongoUri, { useNewUrlParser: true }).then(
   }
 );
 
-app.use("/api/bucketListItems", bucketListItemsRoute);
+app.use("/api/bucket-list", bucketListItemsRoute);
 app.use("/api/habits", habitsRoute);
 
 // sends hello world to anyone requesting acess

@@ -13,7 +13,7 @@ const routes = [
   },
   {
     name: "bucket",
-    path: "/api/bucketListItems/",
+    path: "/api/bucket-list/",
     component: BucketListComponent,
   },
   {

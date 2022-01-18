@@ -9,7 +9,7 @@
       </thead>
       <tbody>
         <tr v-for="row in data.slice(1)" :key="row._id">
-          <th>{{row[0]}}</th>
+          <th>{{ row[0] }}</th>
           <td v-for="cell in row.slice(1)" :key="cell._id">{{ cell }}</td>
         </tr>
       </tbody>
@@ -37,6 +37,6 @@ export default {
 #habitsContainer {
   margin: auto;
   margin-top: 5%;
-  max-width: 80%;
+  max-width: 70%;
 }
 </style>
