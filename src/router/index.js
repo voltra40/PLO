@@ -2,6 +2,8 @@ import { createWebHistory, createRouter } from "vue-router";
 
 import BucketListComponent from '../components/BucketListComponent.vue';
 import HomeComponent from '../components/HomeComponent.vue';
+import HabitsComponent from '../components/HabitsComponent.vue';
+
 
 const routes = [
   {
@@ -13,6 +15,11 @@ const routes = [
     name: "bucket",
     path: "/api/bucketListItems/",
     component: BucketListComponent,
+  },
+  {
+    name: "habits",
+    path: "/api/habits/",
+    component: HabitsComponent,
   },
 ];
 

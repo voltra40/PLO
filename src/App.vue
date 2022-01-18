@@ -7,6 +7,9 @@
       <a class="navbar-item">
         <router-link :to="{ name: 'bucket' }">Bucket List</router-link>
       </a>
+      <a class="navbar-item">
+        <router-link :to="{ name: 'habits' }">Habits</router-link>
+      </a>
     </div>
   </nav>
   <router-view />

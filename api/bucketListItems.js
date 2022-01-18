@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
   try {
     const bucketListItems = await BucketListItem.find();
     if (!bucketListItems) throw new Error("No bucketListItems");
-
     const sorted = bucketListItems.sort((a, b) => {
       return new Date(a.date).getTime - new Date(b.date).getTime();
     });
@@ -22,7 +21,6 @@ router.post("/", async (req, res) => {
   try {
     const bucketListItem = await newBucketListItem.save();
     if (!bucketListItem) throw new Error("Cannot create newBucketListItem");
-
     res.status(200).json(newBucketListItem);
   } catch (error) {
     res.status(500).json({ message: error.message });

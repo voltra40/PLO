@@ -8,6 +8,8 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 // import routes
 const bucketListItemsRoute = require("./bucketListItems");
+const habitsRoute = require("./habits");
+
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(bodyParser.json());
@@ -22,6 +24,7 @@ mongoose.connect(mongoUri, { useNewUrlParser: true }).then(
 );
 
 app.use("/api/bucketListItems", bucketListItemsRoute);
+app.use("/api/habits", habitsRoute);
 
 // sends hello world to anyone requesting acess
 app.get("/", (req, res) => res.send("Hello World"));
