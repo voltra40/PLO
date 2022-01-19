@@ -3,7 +3,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import BucketListComponent from '../components/BucketListComponent.vue';
 import HomeComponent from '../components/HomeComponent.vue';
 import HabitsComponent from '../components/HabitsComponent.vue';
-
+import CryptoComponent from '../components/CryptoPriceComponent.vue';
 
 const routes = [
   {
@@ -13,13 +13,18 @@ const routes = [
   },
   {
     name: "bucket",
-    path: "/api/bucket-list/",
+    path: "/bucket-list/",
     component: BucketListComponent,
   },
   {
     name: "habits",
-    path: "/api/habits/",
+    path: "/habits/",
     component: HabitsComponent,
+  },
+  {
+    name: "crypto",
+    path: "/crypto-prices/",
+    component: CryptoComponent,
   },
 ];
 
