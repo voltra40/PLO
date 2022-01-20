@@ -3,7 +3,7 @@ node_modules
 /dist
 
 /api/config.js
-credentials.json
+/credentials
 
 # local env files
 .env.local

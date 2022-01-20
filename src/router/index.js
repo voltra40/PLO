@@ -4,6 +4,7 @@ import BucketListComponent from '../components/BucketListComponent.vue';
 import HomeComponent from '../components/HomeComponent.vue';
 import HabitsComponent from '../components/HabitsComponent.vue';
 import CryptoComponent from '../components/CryptoPriceComponent.vue';
+import TransactionHistoryComponent from '../components/TransactionHistoryComponent.vue';
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     name: "crypto",
     path: "/crypto-prices/",
     component: CryptoComponent,
+  },
+  {
+    name: "transactions",
+    path: "/transaction-history/",
+    component: TransactionHistoryComponent,
   },
 ];
 

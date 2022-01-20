@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const bucketListItemsRoute = require("./bucketListItems");
 const habitsRoute = require("./habits");
 const cryptoPriceRoute = require("./cryptoPrice");
+const transactionHistoryRoute = require("./transactionHistory")
 
 app.use(cors());
 app.use(morgan("tiny"));
@@ -27,6 +28,7 @@ mongoose.connect(mongoUri, { useNewUrlParser: true }).then(
 app.use("/api/bucket-list", bucketListItemsRoute);
 app.use("/api/habits", habitsRoute);
 app.use("/api/crypto-prices", cryptoPriceRoute);
+app.use("/api/transaction-history", transactionHistoryRoute);
 
 // sends hello world to anyone requesting acess
 app.get("/", (req, res) => res.send("Hello World"));

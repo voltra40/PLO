@@ -2,11 +2,11 @@ const express = require("express");
 
 const { google } = require("googleapis");
 
-const habitRouter = express();
+const transactionRouter = express();
 
-habitRouter.get("/", async (req, res) => {
+transactionRouter.get("/", async (req, res) => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: "../credentials/credentials.json",
+    keyFile: "../credentials/credentials2.json",
     scopes: "https://www.googleapis.com/auth/spreadsheets",
   });
 
@@ -18,8 +18,8 @@ habitRouter.get("/", async (req, res) => {
 
   try {
     const getTable = await googleSheets.spreadsheets.values.get({
-      spreadsheetId: "1ssle0g9ewqyDrR53MR1X9dP6Q2_n__XtEHgctLcCZFc",
-      range: "Sheet1",
+      spreadsheetId: "12vu7FyszT8bcVCUsJ5sm-czVS9yasItkr_XoLkV5NF0",
+      range: "BTC Buy Audit File",
     });
     res.status(200).json(getTable.data);
   } catch (error) {
@@ -27,4 +27,4 @@ habitRouter.get("/", async (req, res) => {
   }
 });
 
-module.exports = habitRouter;
+module.exports = transactionRouter;

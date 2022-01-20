@@ -1,7 +1,7 @@
 <template>
   <div id="habitsContainer">
     <h1 class="title has-text-centered">Habits</h1>
-    <table class="table table is-hoverable">
+    <table class="table is-hoverable">
       <thead>
         <tr>
           <th v-for="habit in data[0]" :key="habit._id">{{ habit }}</th>
