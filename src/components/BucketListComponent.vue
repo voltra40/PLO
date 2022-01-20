@@ -1,6 +1,6 @@
 <template>
   <div id="bucket">
-    <h1 class="subtitle has-text-centered">Bucket List</h1>
+    <h1 class="title has-text-centered">Bucket List</h1>
     <div class="field has-addons">
       <div class="control is-expanded">
         <input

@@ -11,15 +11,16 @@ cryptoRouter.get('/', async(req, res) => {
     headers: {
       'X-CMC_PRO_API_KEY': 'f963b29f-80ac-4790-903c-b9ba5e511ca4'
     },
+    // id for bitcoin and ethereum
     qs: {
-      'id': '1027',
+      'id': '1,1027',
     },
     json: true,
     gzip: true
   };
   const prices = await rp(requestOptions);
   try {
-    res.status(200).json(prices);
+    res.status(200).json(prices.data);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

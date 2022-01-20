@@ -1,6 +1,6 @@
 <template>
   <div id="habitsContainer">
-    <h1 class="subtitle has-text-centered">Habits</h1>
+    <h1 class="title has-text-centered">Habits</h1>
     <table class="table table is-hoverable">
       <thead>
         <tr>
