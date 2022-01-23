@@ -26,8 +26,16 @@
           <span class="tag">${{ averagePrice }} </span>
         </div>
         <div class="tags are-large has-addons">
-          <span class="tag is-dark"> Total </span>
-          <span class="tag">${{ total }} </span>
+          <span class="tag is-dark"> Total Invested </span>
+          <span class="tag">${{ total }} USD</span>
+        </div>
+        <div class="tags are-large has-addons">
+          <span class="tag is-dark"> Total Ethereum </span>
+          <span class="tag">{{ totalETH }} ETH</span>
+        </div>
+        <div class="tags are-large has-addons">
+          <span class="tag is-dark"> Profit/Loss </span>
+          <span v-bind:class="change >= 0 ? 'tag is-success' : 'tag is-danger'"> {{ change.slice(0, 1) + '$' + change.slice(1) }} </span>
         </div>
       </div>
     </div>
@@ -44,6 +52,9 @@ export default {
       data: [],
       averagePrice: "",
       total: "",
+      totalETH: "",
+      currentPrice: "",
+      change: "",
     };
   },
 
@@ -66,16 +77,29 @@ export default {
         }
       }
     }
+    // create table
     this.data = data.slice(2);
 
+    // populate data for tabs: average buy price, total invested, total ethereum
     let tempAverage = 0.0;
     let total = 0.0;
+    let totalEthereum = 0.0;
+
     for (let i = 0; i < this.data.length; i++) {
       total += parseFloat(this.data[i][3]);
       tempAverage += parseFloat(this.data[i][2]).toFixed(2) * parseFloat(this.data[i][3]).toFixed(2);
+      totalEthereum += parseFloat(this.data[i][1]);
     }
-    this.averagePrice = (tempAverage / total).toFixed(2);
-    this.total = total;
+
+    this.averagePrice = (tempAverage / total).toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    this.total = total.toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 2});
+    this.totalETH = totalEthereum.toLocaleString("en-US" , {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+    // retrieve current price
+    let currentPrice = await axios.get("http://localhost:4000/api/crypto-prices");
+    this.currentPrice = parseFloat(currentPrice.data["1027"].quote.USD.price.toFixed(2)).toLocaleString("en-US");
+
+    this.change = parseFloat((currentPrice.data["1027"].quote.USD.price.toFixed(2)) - total).toLocaleString("en-US");
   },
 };
 </script>
