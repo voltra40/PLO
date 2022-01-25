@@ -12,7 +12,7 @@
           <th>{{ row[0] }}</th>
           <td v-for="(cell, c) in row.slice(1)" :key="cell._id" @click="click(r, c, cell)">
             <span class="icon">
-              <i class="material-icons" v-if="cell == 1">{{"check"}}</i>
+              <i class="material-icons" v-if="cell == 1">check</i>
             </span>
           </td>
         </tr>

@@ -5,6 +5,7 @@ import HomeComponent from '../components/HomeComponent.vue';
 import HabitsComponent from '../components/HabitsComponent.vue';
 import CryptoComponent from '../components/CryptoPriceComponent.vue';
 import TransactionHistoryComponent from '../components/TransactionHistoryComponent.vue';
+import SleepDataComponent from '../components/SleepDataComponent.vue';
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     name: "transactions",
     path: "/transaction-history/",
     component: TransactionHistoryComponent,
+  },
+  {
+    name: "sleep",
+    path: "/sleep-data/",
+    component: SleepDataComponent,
   },
 ];
 

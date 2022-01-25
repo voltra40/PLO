@@ -6,6 +6,7 @@
         <a class="navbar-item" href="http://localhost:8080/bucket-list">Bucket List</a>
         <a class="navbar-item" href="http://localhost:8080/habits">Habits</a>
         <a class="navbar-item" href="http://localhost:8080/crypto-prices">Crypto</a>
+        <a class="navbar-item" href="http://localhost:8080/sleep-data">Sleep</a>
       </div>
     <!-- </div> -->
   </nav>

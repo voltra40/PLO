@@ -14,7 +14,7 @@
         <a class="button is-dark" @click="addItem" >Add</a>
       </div>
     </div>
-    <div class="notification" v-for="(item, i) in items" :key="item._id">
+    <div class="box" v-for="(item, i) in items" :key="item._id">
       <div class="columns">
         <input
           class="column input"
