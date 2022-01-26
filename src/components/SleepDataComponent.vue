@@ -1,5 +1,5 @@
 <template>
-  <div id="sleepContainer">
+  <div id="sleepContainer" >
     <h1 class="title has-text-centered">Sleep Data</h1>
     <div v-for="entry in data" :key="entry._id">
       <div class="columns">
@@ -11,7 +11,7 @@
           class="column is-narrow"
         >
           <div class="select">
-            <select v-model="newTime">
+            <select v-model="editedTime">
               <option disabled value="">sleep</option>
               <option
                 v-for="sleepTime in possibleSleepTimes"
@@ -27,7 +27,7 @@
           class="column is-narrow"
         >
           <div class="select">
-            <select v-model="newTime">
+            <select v-model="editedTime">
               <option disabled value="">wake</option>
               <option v-for="wakeTime in possibleWakeTimes" :key="wakeTime._id">
                 {{ wakeTime }}
@@ -65,7 +65,7 @@
             class="icon is-medium"
             @click="
               unselect();
-              editTime(entry, entry.sleep);
+              updateTime(entry, entry.sleep);
             "
           >
             <i class="material-icons">save</i>
@@ -82,7 +82,7 @@
             class="icon is-medium"
             @click="
               unselect();
-              editTime(entry, entry.wake);
+              updateTime(entry, entry.wake);
             "
           >
             <i class="material-icons">save</i>
@@ -98,6 +98,14 @@
         </div>
       </div>
     </div>
+      <div class="columns">
+        <div class="column is narrow">
+          <h2 class="subtitle"> Potential Wake Up Times: </h2>
+          <div class="tags are-medium">
+            <span v-bind:class="i == 4 ? 'tag is-success' : 'tag'" v-for="(bestWakeTime, i) in bestWakeTimes" :key="bestWakeTime._id"> {{ bestWakeTime }} </span>
+          </div>
+        </div>
+      </div>
     <div class="columns" v-if="Object.keys(selected).length === 0">
       <div class="column is-narrow">
         <button class="button is-link" @click="addTime">Sleep</button>
@@ -126,13 +134,15 @@ export default {
   data() {
     return {
       data: [],
-      sleepTime: "",
-      newTime: "",
+      editedTime: "",
       selected: {},
       type: "",
       possibleSleepTimes: [],
       possibleWakeTimes: [],
       newSleepTime: "",
+
+      formalTime: "",
+      bestWakeTimes: [],
     };
   },
 
@@ -144,7 +154,7 @@ export default {
     }
 
     // populate sleep times
-    for (let i = 9; i < 15; i++) {
+    for (let hour = 9; hour < 15; hour++) {
       for (let minutes = 0; minutes < 60; minutes += 5) {
         let minutesString = "";
         if (minutes == 0) {
@@ -154,17 +164,18 @@ export default {
         } else {
           minutesString = ":" + minutes + " ";
         }
-        if (i < 12) {
-          this.possibleSleepTimes.push(i + minutesString + "pm");
-        } else if (i == 12) {
-          this.possibleSleepTimes.push(i + minutesString + "am");
+        if (hour < 12) {
+          this.possibleSleepTimes.push(hour + minutesString + "pm");
+        } else if (hour == 12) {
+          this.possibleSleepTimes.push(hour + minutesString + "am");
         } else {
-          this.possibleSleepTimes.push(i - 12 + minutesString + "am");
+          this.possibleSleepTimes.push(hour - 12 + minutesString + "am");
         }
       }
     }
+
     // populate wake times
-    for (let i = 5; i < 11; i++) {
+    for (let hour = 5; hour < 11; hour++) {
       for (let minutes = 0; minutes < 60; minutes += 5) {
         let minutesString = "";
         if (minutes == 0) {
@@ -174,8 +185,35 @@ export default {
         } else {
           minutesString = ":" + minutes + " ";
         }
-        this.possibleWakeTimes.push(i + minutesString + "am");
+        this.possibleWakeTimes.push(hour + minutesString + "am");
       }
+    }
+
+    // convert time to 24 hr, ex. 9:30 pm is 21:30; 12:00 am is 00:00
+    // this is a mess
+    this.newSleepTime = this.data[this.data.length-1].sleep;
+    let formalTime = "";
+    let hour = Number(this.newSleepTime.substring(0, this.newSleepTime.indexOf(':')));
+    let minutes = this.newSleepTime.substring(this.newSleepTime.indexOf(':'), this.newSleepTime.indexOf(':') + 3);
+    if ((hour < 12) && (this.newSleepTime.substring(this.newSleepTime.length-2, this.newSleepTime.length) === "pm")) {
+      formalTime = String(hour + 12) + minutes;
+    } else if (hour == 12) {
+      formalTime = "00" + minutes;
+    } else {
+      formalTime = hour + minutes;
+    }
+
+    this.formalTime = formalTime;
+
+    // populate best wake times
+    let d = new Date();
+    d.setHours(formalTime.substring(0, formalTime.indexOf(':')), formalTime.substring(formalTime.indexOf(':') + 1, formalTime.length), 0);
+    for (let i = 0; i < 6; i ++) {
+      // add 15 minutes to fall asleep
+      if (i == 0) d.setMinutes(d.getMinutes() + 15);
+      // increment by 90 minutes
+      let d2 = new Date (d.setHours(d.getHours() + 1, d.getMinutes() + 30));
+      this.bestWakeTimes.push(d2.toLocaleTimeString("en-US"));
     }
   },
 
@@ -212,12 +250,12 @@ export default {
       this.selected = {};
     },
 
-    async editTime(entry, type) {
-      if (this.newTime !== "") {
+    async updateTime(entry, type) {
+      if (this.editedTime !== "") {
         if (type == entry.sleep) {
-          await axios.put("http://localhost:4000/api/sleep-data/" + entry._id, { sleep: this.newTime });
+          await axios.put("http://localhost:4000/api/sleep-data/" + entry._id, { sleep: this.editedTime });
         } else if (type == entry.wake) {
-          await axios.put("http://localhost:4000/api/sleep-data/" + entry._id, { wake: this.newTime });
+          await axios.put("http://localhost:4000/api/sleep-data/" + entry._id, { wake: this.editedTime });
         }
       }
       location.reload();
