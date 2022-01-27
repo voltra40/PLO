@@ -1,29 +1,33 @@
 <template>
-  <div id="habitsContainer">
-    <h1 class="title has-text-centered">Habits</h1>
-    <table class="table is-hoverable">
-      <thead>
-        <tr>
-          <th v-for="habit in data[0]" :key="habit._id">{{ habit }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(row, r) in data.slice(1)" :key="row._id">
-          <th>{{ row[0] }}</th>
-          <td v-for="(cell, c) in row.slice(1)" :key="cell._id" @click="click(r, c, cell)">
-            <span class="icon">
-              <i class="material-icons" v-if="cell == 1">check</i>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="columns">
-      <div class="column is-narrow">
-        <button class="button is-link" @click="addHabit">Add</button>
-      </div>
-      <div class="column is-narrow">
-        <input class="input is-hoverable" type="text" placeholder="Input a new habit" v-model="habit">
+  <div id="habitsContainer" class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <h1 class="title has-text-centered">Habits</h1>
+        <table class="table is-hoverable">
+          <thead>
+            <tr>
+              <th v-for="habit in data[0]" :key="habit._id">{{ habit }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(row, r) in data.slice(1)" :key="row._id">
+              <th>{{ row[0] }}</th>
+              <td v-for="(cell, c) in row.slice(1)" :key="cell._id" @click="click(r, c, cell)">
+                <span class="icon">
+                  <i class="material-icons" v-if="cell == 1">check</i>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="columns">
+          <div class="column is-narrow">
+            <button class="button is-link" @click="addHabit">Add</button>
+          </div>
+          <div class="column is-narrow">
+            <input class="input is-hoverable" type="text" placeholder="Input a new habit" v-model="habit">
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -80,6 +84,5 @@ export default {
 #habitsContainer {
   margin: auto;
   margin-top: 5%;
-  margin-left: 5%;
 }
 </style>
