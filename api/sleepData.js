@@ -3,13 +3,16 @@ const { model, Schema } = require("mongoose");
 
 const sleepRouter = express();
 
-const sleepEntry = model('Sleep Entry', new Schema({ date: String, sleep: String, wake: String }));
+const sleepEntry = model('Sleep Entry', new Schema({ date: Date, sleep: String, wake: String }));
 
 sleepRouter.get('/', async (req, res) => {
   try {
     const sleepEntries = await sleepEntry.find();
     if (!sleepEntries) throw new Error("No sleepEntries");
-    res.status(200).json(sleepEntries);
+    const sorted = sleepEntries.sort((a, b) => {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
+    res.status(200).json(sorted);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
