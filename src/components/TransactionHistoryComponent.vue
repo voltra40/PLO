@@ -1,7 +1,7 @@
 <template>
   <div id="transactions">
     <h1 class="title has-text-centered">Transactions</h1>
-    <div class="columns">
+    <div class="columns is-centered">
       <div class="column">
         <table class="table is-hoverable is-fullWidth is-striped">
           <thead>

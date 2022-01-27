@@ -6,6 +6,7 @@ import HabitsComponent from '../components/HabitsComponent.vue';
 import CryptoComponent from '../components/CryptoPriceComponent.vue';
 import TransactionHistoryComponent from '../components/TransactionHistoryComponent.vue';
 import SleepDataComponent from '../components/SleepDataComponent.vue';
+import SleepDataFullComponent from '../components/SleepDataFullComponent.vue';
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     name: "sleep",
     path: "/sleep-data/",
     component: SleepDataComponent,
+  },
+  {
+    name: "sleep data full",
+    path: "/sleep-data-full/",
+    component: SleepDataFullComponent,
   },
 ];
 

@@ -1,8 +1,8 @@
 <template>
   <div id="sleepContainer">
     <div class="columns is-centered">
-      <div class="column is-half">
-        <h1 class="title has-text-centered">Sleep Data</h1>
+      <div class="column is-narrow">
+        <h1 class="title">Sleep Data</h1>
         <div v-for="entry in data" :key="entry._id">
           <div class="columns">
             <div class="column is-narrow">
@@ -111,17 +111,25 @@
             </div>
           </div>
         </div>
-        <div class="columns">
-          <div class="column is narrow">
-            <h2 class="subtitle">Potential Wake Up Times:</h2>
-            <div class="tags are-medium">
-              <span
-                v-bind:class="i == 4 ? 'tag is-success' : 'tag'"
-                v-for="(bestWakeTime, i) in bestWakeTimes"
-                :key="bestWakeTime._id"
-              >
+      <router-link :to="{ name: 'sleep data full' }">
+        <button class="button is-link">View More</button>
+      </router-link>
+      </div>
+      <div class="column is-narrow">
+        <h1 class="title">Calculator</h1>
+          <div class="columns">
+            <div class="column is narrow">
+              <div class="notification">
+              <h2 class="subtitle">Potential Wake Up Times:</h2>
+              <div class="tags are-medium">
+                <span
+                  v-bind:class="i == 4 ? 'tag is-success' : 'tag is-white'"
+                  v-for="(bestWakeTime, i) in bestWakeTimes"
+                  :key="bestWakeTime._id"
+                >
                 {{ bestWakeTime }}
-              </span>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -169,7 +177,8 @@ export default {
 
   async mounted() {
     const response = await axios.get("http://localhost:4000/api/sleep-data");
-    this.data = response.data;
+    // filter only last 7 days
+    this.data = response.data.slice(-7);
 
     // populate sleep times
     for (let hour = 9; hour < 15; hour++) {
