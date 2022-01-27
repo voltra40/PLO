@@ -1,10 +1,29 @@
 <template>
   <div id="home">
-    <h1 class="title has-text-centered"> Hello Anthony </h1>
+    <h1 class="title has-text-centered"> Anthony </h1>
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <div class="buttons">
+            <button class="button is-black" @click="openLinkedIn"> LinkedIn </button>
+            <button class="button is-black" @click="openGitHub"> GitHub </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
+
+  methods: {
+    openLinkedIn() {
+      window.open("https://linkedin.com/in/anthonygarcia40");
+    },
+    openGitHub() {
+      window.open("https://github.com/voltra40");
+    }
+  }
 }
 </script>
 
