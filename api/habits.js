@@ -36,7 +36,7 @@ class Habit {
 // get data
 habitRouter.get('/', async (req, res) => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: '../credentials/credentials.json',
+    keyFile: './credentials/credentials.json',
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
 

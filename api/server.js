@@ -13,6 +13,7 @@ const cryptoPriceRoute = require("./cryptoPrice");
 const transactionHistoryRoute = require("./transactionHistory");
 const sleepRoute = require("./sleepData");
 
+const path = require('path');
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());
@@ -36,6 +37,14 @@ app.use("/api/sleep-data", sleepRoute);
 
 // sends hello world to anyone requesting acess
 app.get("/", (req, res) => res.send("Hello World"));
+
+// check if in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('../dist'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../public'))
+  })
+}
 
 app.listen(PORT, () => {
   console.log("App listening at http://localhost:" + PORT);
