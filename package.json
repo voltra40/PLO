@@ -9,7 +9,7 @@
     "client": "npm run serve",
     "server": "nodemon server.js --prefix api",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "start": "node server.js --prefix api"
+    "start": "node api/server.js"
   },
   "dependencies": {
     "axios": "^0.24.0",
