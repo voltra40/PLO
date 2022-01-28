@@ -40,9 +40,9 @@ app.use("/api/sleep-data", sleepRoute);
 
 // check if in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(__dirname + '/dist'));
-  app.get('/.*/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '/public/index.html'))
+  app.use(express.static('/dist'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
   })
 }
 
