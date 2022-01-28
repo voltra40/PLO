@@ -36,13 +36,13 @@ app.use("/api/transaction-history", transactionHistoryRoute);
 app.use("/api/sleep-data", sleepRoute);
 
 // sends hello world to anyone requesting acess
-app.get("/", (req, res) => res.send("Hello World"));
+// app.get("/", (req, res) => res.send("Hello World"));
 
 // check if in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('../dist'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '/public'))
+  app.use(express.static(__dirname + '/dist'));
+  app.get('/.*/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '/public/index.html'))
   })
 }
 
