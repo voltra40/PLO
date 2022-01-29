@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-// const { mongoUri } = require("./config");
+const { mongoUri } = require("./config");
 const cors = require("cors");
 // logs error requests to the server in the console, uses tiny configuration
 const morgan = require("morgan");
