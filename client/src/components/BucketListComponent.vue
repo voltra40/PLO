@@ -52,18 +52,18 @@ export default {
   },
 
   async mounted() {
-    const response = await axios.get("http://localhost:4000/api/bucket-list");
+    const response = await axios.get("api/bucket-list");
     this.items = response.data;
   },
 
   methods: {
     async addItem() {
-      const response = await axios.post("http://localhost:4000/api/bucket-list/", { description: this.description });
+      const response = await axios.post("api/bucket-list/", { description: this.description });
       this.items.push(response.data);
       this.description = "";
     },
     async deleteItem(item, i) {
-      await axios.delete("http://localhost:4000/api/bucket-list/" + item._id);
+      await axios.delete("api/bucket-list/" + item._id);
       this.items.splice(i, 1);
     },
     select(item) {
@@ -78,7 +78,7 @@ export default {
       this.editedDescription = "";
     },
     async updateItem(item, i) {
-      let response = await axios.put("http://localhost:4000/api/bucket-list/" + item._id, { description: this.editedDescription });
+      let response = await axios.put("api/bucket-list/" + item._id, { description: this.editedDescription });
       this.items[i] = response.data;
       this.unselect();
     },
