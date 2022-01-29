@@ -35,7 +35,7 @@ export default {
   },
 
   async mounted() {
-    const response = await axios.get("http://localhost:4000/api/sleep-data");
+    const response = await axios.get("api/sleep-data");
     this.data = response.data;
   },
 };

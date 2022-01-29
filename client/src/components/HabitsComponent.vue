@@ -58,21 +58,21 @@ export default {
   },
 
   async mounted() {
-    const response = await axios.get("http://localhost:4000/api/habits");
+    const response = await axios.get("api/habits");
     this.data = response.data.values;
   },
   methods: {
     async addHabit() {
-      await axios.post("http://localhost:4000/api/habits/", { habit: this.habit });
+      await axios.post("api/habits/", { habit: this.habit });
       location.reload();
     },
 
     // adds or deletes completion (check mark) to habit at row r and column c
     async click(r, c, cell) {
       if (cell === '1') {
-        await axios.put("http://localhost:4000/api/habits/" + getA1Notation(r+1, c+1), { value: 0});
+        await axios.put("api/habits/" + getA1Notation(r+1, c+1), { value: 0});
       } else {
-        await axios.put("http://localhost:4000/api/habits/" + getA1Notation(r+1, c+1), { value: 1});
+        await axios.put("api/habits/" + getA1Notation(r+1, c+1), { value: 1});
       }
       location.reload();
     },

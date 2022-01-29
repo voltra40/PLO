@@ -1,24 +1,8 @@
-# mevn
+# PLO
 
-## Project setup
-```
-npm install
-```
+1. npm install
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+2. npm run server
 
-### Compiles and minifies for production
-```
-npm run build
-```
+3. npm run client
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
