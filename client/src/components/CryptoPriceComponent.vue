@@ -17,6 +17,11 @@
 <script>
 import axios from "axios";
 export default {
+
+  created() {
+    document.title = "Crypto";
+  },
+
   data() {
     return {
       cryptos: [],

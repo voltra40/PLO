@@ -160,6 +160,11 @@
 import axios from "axios";
 
 export default {
+
+  created() {
+    document.title = "Sleep";
+  },
+
   data() {
     return {
       data: [],

@@ -13,16 +13,19 @@ const routes = [
     name: "home",
     path: "/",
     component: HomeComponent,
+    metaInfo: { title: 'PLO - Home' }
   },
   {
     name: "bucket",
     path: "/bucket-list/",
     component: BucketListComponent,
+    meta: { title: 'PLO - Bucket' }
   },
   {
     name: "habits",
     path: "/habits/",
     component: HabitsComponent,
+    
   },
   {
     name: "crypto",

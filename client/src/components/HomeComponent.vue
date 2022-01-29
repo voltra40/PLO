@@ -16,6 +16,10 @@
 <script>
 export default {
 
+  created() {
+    document.title = "Home";
+  },
+
   methods: {
     openLinkedIn() {
       window.open("https://linkedin.com/in/anthonygarcia40");

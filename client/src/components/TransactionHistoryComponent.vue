@@ -46,6 +46,11 @@
 import axios from "axios";
 
 export default {
+
+  created() {
+    document.title = "Crypto Data";
+  },
+
   data() {
     return {
       columns: [],
@@ -59,7 +64,7 @@ export default {
   },
 
   async mounted() {
-    const response = await axios.get("api/transaction-history");
+    const response = await axios.get("/api/transaction-history");
     let data = response.data.values;
 
     // removes uncessary elements from data
@@ -96,7 +101,7 @@ export default {
     this.totalETH = totalEthereum.toLocaleString("en-US" , {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
     // retrieve current price
-    let currentPrice = await axios.get("api/crypto-prices");
+    let currentPrice = await axios.get("/api/crypto-prices");
     this.currentPrice = parseFloat(currentPrice.data["1027"].quote.USD.price.toFixed(2)).toLocaleString("en-US");
 
     this.change = parseFloat((currentPrice.data["1027"].quote.USD.price.toFixed(2)) - total).toLocaleString("en-US");

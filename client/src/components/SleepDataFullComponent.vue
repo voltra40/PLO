@@ -28,6 +28,11 @@
 import axios from "axios";
 
 export default {
+
+  created() {
+    document.title = "Sleep Data";
+  },
+
   data() {
     return {
       data: [],
@@ -35,7 +40,7 @@ export default {
   },
 
   async mounted() {
-    const response = await axios.get("api/sleep-data");
+    const response = await axios.get("/api/sleep-data");
     this.data = response.data;
   },
 };

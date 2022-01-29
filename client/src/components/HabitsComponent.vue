@@ -20,12 +20,16 @@
             </tr>
           </tbody>
         </table>
-        <div class="columns">
-          <div class="column is-narrow">
-            <button class="button is-link" @click="addHabit">Add</button>
+        <div class="field has-addons">
+          <div class="control">
+            <input class="input"
+              type="text"
+              placeholder="add a new habit..." 
+              v-model="habit"
+            />
           </div>
-          <div class="column is-narrow">
-            <input class="input is-hoverable" type="text" placeholder="Input a new habit" v-model="habit">
+          <div class="control">
+            <button class="button is-dark" @click="addHabit">Add</button>
           </div>
         </div>
       </div>
@@ -50,6 +54,11 @@ const getA1Notation = (row, column) => {
 
 import axios from "axios";
 export default {
+
+  created() {
+    document.title = "Habits";
+  },
+
   data() {
     return {
       data: [],
