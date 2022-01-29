@@ -1,12 +1,12 @@
 import { createWebHistory, createRouter } from "vue-router";
 
-import BucketListComponent from '../components/BucketListComponent.vue';
-import HomeComponent from '../components/HomeComponent.vue';
-import HabitsComponent from '../components/HabitsComponent.vue';
-import CryptoComponent from '../components/CryptoPriceComponent.vue';
-import TransactionHistoryComponent from '../components/TransactionHistoryComponent.vue';
-import SleepDataComponent from '../components/SleepDataComponent.vue';
-import SleepDataFullComponent from '../components/SleepDataFullComponent.vue';
+import BucketListComponent from "../components/BucketListComponent.vue";
+import HomeComponent from "../components/HomeComponent.vue";
+import HabitsComponent from "../components/HabitsComponent.vue";
+import CryptoComponent from "../components/CryptoPriceComponent.vue";
+import TransactionHistoryComponent from "../components/TransactionHistoryComponent.vue";
+import SleepDataComponent from "../components/SleepDataComponent.vue";
+import SleepDataFullComponent from "../components/SleepDataFullComponent.vue";
 
 const routes = [
   {
@@ -47,8 +47,8 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
+  history: createWebHistory(),
+  routes,
 });
 
 export default router;

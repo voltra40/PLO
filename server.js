@@ -7,11 +7,11 @@ const cors = require("cors");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 // import routes
-const bucketListItemsRoute = require("./bucketListItems");
-const habitsRoute = require("./habits");
-const cryptoPriceRoute = require("./cryptoPrice");
-const transactionHistoryRoute = require("./transactionHistory");
-const sleepRoute = require("./sleepData");
+const bucketListItemsRoute = require("./api/bucketListItems");
+const habitsRoute = require("./api/habits");
+const cryptoPriceRoute = require("./api/cryptoPrice");
+const transactionHistoryRoute = require("./api/transactionHistory");
+const sleepRoute = require("./api/sleepData");
 
 const path = require('path');
 const PORT = process.env.PORT || 4000;
@@ -40,9 +40,9 @@ app.use("/api/sleep-data", sleepRoute);
 
 // check if in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('/dist'));
+  app.use(express.static('client/dist'));
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
   })
 }
 
