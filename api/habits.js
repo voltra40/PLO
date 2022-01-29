@@ -37,7 +37,7 @@ class Habit {
 habitRouter.get('/', async (req, res) => {
   const auth = new google.auth.GoogleAuth({
     // change for heroku
-    keyFile: '../google-credentials.json',
+    keyFile: './google-credentials.json',
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
 
@@ -61,7 +61,7 @@ habitRouter.get('/', async (req, res) => {
 // add new habit to the table
 habitRouter.post('/', async (req, res) => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: '../google-credentials.json',
+    keyFile: './google-credentials.json',
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
   const client = await auth.getClient();
@@ -88,7 +88,7 @@ habitRouter.post('/', async (req, res) => {
 // update habit's completion (yes or no in sheets, 1 or 0 respectively)
 habitRouter.put('/:id', async (req, res) => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: '../google-credentials.json',
+    keyFile: './google-credentials.json',
     scopes: 'https://www.googleapis.com/auth/spreadsheets',
   });
   const client = await auth.getClient();
