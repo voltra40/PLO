@@ -24,7 +24,7 @@ export default {
   },
 
   async mounted() {
-    const response = await axios.get("http://localhost:4000/api/crypto-prices");
+    const response = await axios.get("api/crypto-prices");
     // replace tempData with "response" when deploying
     const data = response.data;
     for (var id in data) {

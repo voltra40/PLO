@@ -176,7 +176,7 @@ export default {
   },
 
   async mounted() {
-    const response = await axios.get("http://localhost:4000/api/sleep-data");
+    const response = await axios.get("api/sleep-data");
     // filter only last 7 days
     this.data = response.data.slice(-7);
 
@@ -249,7 +249,7 @@ export default {
   methods: {
     async addTime() {
       const today = new Date();
-      await axios.post("http://localhost:4000/api/sleep-data/", {
+      await axios.post("api/sleep-data/", {
         date: today,
         sleep: this.newSleepTime,
         wake: "?",
@@ -258,7 +258,7 @@ export default {
     },
 
     async deleteEntry(entry) {
-      await axios.delete("http://localhost:4000/api/sleep-data/" + entry._id);
+      await axios.delete("api/sleep-data/" + entry._id);
       location.reload();
     },
 
@@ -282,9 +282,9 @@ export default {
     async updateTime(entry, type) {
       if (this.editedTime !== "") {
         if (type == entry.sleep) {
-          await axios.put("http://localhost:4000/api/sleep-data/" + entry._id, { sleep: this.editedTime });
+          await axios.put("api/sleep-data/" + entry._id, { sleep: this.editedTime });
         } else if (type == entry.wake) {
-          await axios.put("http://localhost:4000/api/sleep-data/" + entry._id, { wake: this.editedTime });
+          await axios.put("api/sleep-data/" + entry._id, { wake: this.editedTime });
         }
       }
       location.reload();
